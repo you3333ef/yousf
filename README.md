@@ -218,6 +218,10 @@ This project is licensed under the MIT License.
 - Icons by Lucide React
 - Deployment on Netlify
 
+## 📊 Repository Migration
+
+This repository was migrated to demonstrate showing all companies per country in the dropdown selection.
+
 ---
 
 **Live Demo:** [View on Netlify](https://app.netlify.com/)

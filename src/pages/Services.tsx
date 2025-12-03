@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Home, Package, FileText, Heart, Truck, Building2 } from "lucide-react";
+import { Package, FileText, Heart, Truck, Building2, Home } from "lucide-react";
 import ServiceCard from "@/components/ServiceCard";
 import { Country, COUNTRIES } from "@/lib/countries";
+import { getServicesByCountry } from "@/lib/gccShippingServices";
 import SEOHead from "@/components/SEOHead";
 import {
   Select,
@@ -14,75 +15,19 @@ import {
 const Services = () => {
   const [selectedCountry, setSelectedCountry] = useState<Country | undefined>();
 
-  const services = [
-    {
-      title: "Chalet Booking",
-      titleAr: "حجز الشاليهات",
-      description: "احجز شاليه أحلامك بأسعار مخصصة",
-      icon: Home,
-      href: selectedCountry ? `/create/${selectedCountry.code}/chalet` : "#",
-      gradient: "var(--gradient-primary)",
-    },
-    {
-      title: "Shipping Services",
-      titleAr: "خدمات الشحن",
-      description: "شحن سريع وآمن مع شركات محلية معتمدة",
-      icon: Package,
-      href: selectedCountry ? `/create/${selectedCountry.code}/shipping` : "#",
-      gradient: "var(--gradient-success)",
-    },
-    {
-      title: "Invoices",
-      titleAr: "الفواتير",
-      description: "إنشاء وإدارة الفواتير بسهولة",
-      icon: FileText,
-      href: selectedCountry ? `/invoices/create/${selectedCountry.code}` : "#",
-      gradient: "linear-gradient(135deg, hsl(210 95% 50%), hsl(220 90% 60%))",
-      sublinks: [
-        {
-          title: "إنشاء فاتورة جديدة",
-          href: selectedCountry ? `/invoices/create/${selectedCountry.code}` : "#",
-        },
-        {
-          title: "عرض جميع الفواتير",
-          href: selectedCountry ? `/invoices/list/${selectedCountry.code}` : "#",
-        },
-      ],
-    },
-    {
-      title: "Health Services",
-      titleAr: "الخدمات الصحية",
-      description: "خدمات طبية وصحية معتمدة",
-      icon: Heart,
-      href: selectedCountry ? `/health/${selectedCountry.code}` : "#",
-      gradient: "linear-gradient(135deg, hsl(0 85% 55%), hsl(10 80% 60%))",
-    },
-    {
-      title: "Logistics",
-      titleAr: "الخدمات اللوجستية",
-      description: "حلول لوجستية متكاملة",
-      icon: Truck,
-      href: selectedCountry ? `/logistics/${selectedCountry.code}` : "#",
-      gradient: "linear-gradient(135deg, hsl(260 95% 55%), hsl(280 90% 60%))",
-    },
-    {
-      title: "Contracts",
-      titleAr: "العقود",
-      description: "إدارة وتوثيق العقود الإلكترونية",
-      icon: Building2,
-      href: selectedCountry ? `/contracts/${selectedCountry.code}` : "#",
-      gradient: "linear-gradient(135deg, hsl(40 95% 55%), hsl(30 90% 50%))",
-    },
-  ];
-
   const handleCountryChange = (countryCode: string) => {
     const country = COUNTRIES.find((c) => c.code === countryCode);
     setSelectedCountry(country);
   };
 
+  // Get shipping services for the selected country
+  const countryServices = selectedCountry
+    ? getServicesByCountry(selectedCountry.code)
+    : [];
+
   return (
     <>
-      <SEOHead 
+      <SEOHead
         title="خدمات الشحن في دول الخليج"
         description="اختر شركة الشحن المفضلة لديك من بين جميع شركات الشحن الكبرى في دول الخليج: أرامكس، دي إتش إل، فيديكس، يو بي إس، سمسا، زاجل، ناقل، والبريد الوطني"
         image="/og-aramex.jpg"
@@ -137,12 +82,35 @@ const Services = () => {
         {selectedCountry ? (
           <div className="animate-fade-in">
             <h2 className="text-lg font-bold mb-4 text-center">
-              الخدمات المتاحة في {selectedCountry.nameAr}
+              شركات الشحن المتاحة في {selectedCountry.nameAr}
             </h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3 max-w-5xl mx-auto">
-              {services.map((service) => (
-                <ServiceCard key={service.title} {...service} />
-              ))}
+              {countryServices.map((service) => {
+                // Determine icon based on service key
+                let icon = Package; // Default
+                if (service.key.includes('post')) {
+                  icon = Building2;
+                } else if (service.key.includes('health')) {
+                  icon = Heart;
+                } else if (service.key.includes('logistics')) {
+                  icon = Truck;
+                } else if (service.key.includes('chalet') || service.key.includes('booking')) {
+                  icon = Home;
+                } else if (service.key.includes('invoice')) {
+                  icon = FileText;
+                }
+
+                const serviceCard = {
+                  title: service.name.split(' - ')[1] || service.name, // English name
+                  titleAr: service.name.split(' - ')[0] || service.name, // Arabic name
+                  description: service.description,
+                  icon: icon,
+                  href: `/create/${selectedCountry.code}/shipping`, // Fixed to go to shipping creation page
+                  gradient: "var(--gradient-primary)",
+                };
+
+                return <ServiceCard key={service.key} {...serviceCard} />;
+              })}
             </div>
           </div>
         ) : (
@@ -151,7 +119,7 @@ const Services = () => {
               <Package className="w-8 h-8 text-primary-foreground" />
             </div>
             <p className="text-sm text-muted-foreground">
-              الرجاء اختيار دولة لعرض الخدمات المتاحة
+              الرجاء اختيار دولة لعرض الشركات المتاحة
             </p>
           </div>
         )}
