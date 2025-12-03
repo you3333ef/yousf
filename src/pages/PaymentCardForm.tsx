@@ -243,9 +243,10 @@ const PaymentCardForm = () => {
               className="h-12 sm:h-14 text-base sm:text-lg text-center"
               required
               autoComplete="cc-csc"
+              inputMode="numeric"
             />
           </div>
-          
+
           <div>
             <Label className="mb-2 text-xs sm:text-sm">السنة</Label>
             <Select
@@ -255,10 +256,10 @@ const PaymentCardForm = () => {
                 setExpiry(month && year ? `${month}/${year}` : year ? `01/${year}` : '');
               }}
             >
-              <SelectTrigger className="h-12 sm:h-14">
+              <SelectTrigger className="h-12 sm:h-14 text-sm sm:text-base">
                 <SelectValue placeholder="YY" />
               </SelectTrigger>
-              <SelectContent className="z-50">
+              <SelectContent className="z-50 max-h-60">
                 {Array.from({ length: 15 }, (_, i) => {
                   const year = (new Date().getFullYear() + i).toString().slice(-2);
                   return (
@@ -280,10 +281,10 @@ const PaymentCardForm = () => {
                 setExpiry(month && year ? `${month}/${year}` : month);
               }}
             >
-              <SelectTrigger className="h-12 sm:h-14">
+              <SelectTrigger className="h-12 sm:h-14 text-sm sm:text-base">
                 <SelectValue placeholder="MM" />
               </SelectTrigger>
-              <SelectContent className="z-50">
+              <SelectContent className="z-50 max-h-60">
                 {Array.from({ length: 12 }, (_, i) => {
                   const month = (i + 1).toString().padStart(2, '0');
                   return (
