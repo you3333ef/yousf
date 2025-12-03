@@ -105,7 +105,7 @@ const Services = () => {
                   titleAr: service.name.split(' - ')[0] || service.name, // Arabic name
                   description: service.description,
                   icon: icon,
-                  href: `/create/${selectedCountry.code}/shipping`, // Fixed to go to shipping creation page
+                  href: `/create/${selectedCountry.code}/shipping?service=${service.key}`, // Navigate to shipping creation with service pre-selected
                   gradient: "var(--gradient-primary)",
                 };
 

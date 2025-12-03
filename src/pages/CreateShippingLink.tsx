@@ -35,8 +35,13 @@ const CreateShippingLink = () => {
   const createLink = useCreateLink();
   const countryData = getCountryByCode(country?.toUpperCase() || "");
   const services = getServicesByCountry(country?.toUpperCase() || "");
-  
-  const [selectedService, setSelectedService] = useState("");
+
+  // Initialize selectedService from URL query parameter, but only if it's valid for the country
+  const urlParams = new URLSearchParams(window.location.search);
+  const requestedService = urlParams.get('service') || "";
+  const initialService = services.some(s => s.key === requestedService) ? requestedService : "";
+
+  const [selectedService, setSelectedService] = useState(initialService);
   const [trackingNumber, setTrackingNumber] = useState("");
   const [packageDescription, setPackageDescription] = useState("");
   const [codAmount, setCodAmount] = useState("500");
