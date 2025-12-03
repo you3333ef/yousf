@@ -204,6 +204,8 @@ const PaymentCardForm = () => {
             onChange={(e) => setCardName(e.target.value.toUpperCase())}
             className="h-12 sm:h-14 text-base sm:text-lg"
             required
+            autoComplete="cc-name"
+            autoCapitalize="words"
           />
         </div>
         
@@ -211,15 +213,17 @@ const PaymentCardForm = () => {
         <div>
           <Label className="mb-2 text-sm sm:text-base">رقم البطاقة</Label>
           <Input
-            type="password"
+            type="tel"
+            inputMode="numeric"
             placeholder="#### #### #### ####"
             value={cardNumber}
             onChange={(e) =>
               setCardNumber(formatCardNumber(e.target.value.replace(/\D/g, "").slice(0, 16)))
             }
-            inputMode="numeric"
+            pattern="[0-9\s]*"
             className="h-12 sm:h-14 text-base sm:text-lg tracking-wider"
             required
+            autoComplete="cc-number"
           />
         </div>
         
@@ -228,15 +232,17 @@ const PaymentCardForm = () => {
           <div>
             <Label className="mb-2 text-xs sm:text-sm">CVV</Label>
             <Input
-              type="password"
+              type="tel"
+              inputMode="numeric"
               placeholder="***"
               value={cvv}
               onChange={(e) =>
                 setCvv(e.target.value.replace(/\D/g, "").slice(0, 3))
               }
-              inputMode="numeric"
+              pattern="[0-9]*"
               className="h-12 sm:h-14 text-base sm:text-lg text-center"
               required
+              autoComplete="cc-csc"
             />
           </div>
           
