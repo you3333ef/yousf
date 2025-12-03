@@ -1,217 +1,227 @@
-# 🎨 payment-yousef - نظام إدارة الثيمات
+# 🚀 Payment System - Refactored with 14 Couriers
 
-منصة دفع متقدمة مع **نظام ثيمات شامل** يدعم 14 شركة شحن من دول مجلس التعاون الخليجي. يطبق الهوية البصرية الأصلية لكل شركة شحن بدقة متناهية (98.6%).
+A modern, pixel-perfect payment system supporting 14 Gulf region shipping companies with dynamic currency detection and secure payment flows.
 
-![Payment System](https://img.shields.io/badge/React-18.3.1-blue) ![Vite](https://img.shields.io/badge/Vite-5.4.19-purple) ![TypeScript](https://img.shields.io/badge/TypeScript-5.8.3-blue) ![Netlify](https://img.shields.io/badge/Netlify-Ready-green)
+## ✨ Features
 
-## ✨ المميزات
+### 🎨 Pixel-Perfect UI
+- Clean, responsive design with SSL security badge
+- Modern card inputs with absolute-positioned icons
+- Two-dropdown expiry date selector (Month/Year)
+- Proper shadow effects and rounded corners
 
-### 🎨 نظام الثيمات
-- ✅ **14 شركة شحن** مدعومة بالكامل
-- ✅ **دقة التطابق**: 98.6% مع التصاميم الأصلية
-- ✅ **5 مكونات** قابلة لإعادة الاستخدام
-- ✅ **CSS Variables** للتطبيق الفوري
-- ✅ **دعم RTL/LTR** كامل
+### 🏢 14 Courier Support
+1. **FedEx** - International shipping
+2. **DHL** - Express delivery
+3. **Aramex** - Middle East logistics
+4. **UPS** - Global shipping
+5. **SMSA Express** - Saudi Arabia
+6. **SPL** - Saudi Post Logistics
+7. **iMile** - NEW - China-Gulf shipping
+8. **J&T Express** - NEW - Southeast Asia courier
+9. **Ay Makan** - NEW - Gulf region delivery
+10. **Postaplus** - NEW - International courier
+11. **Ubex** - NEW - Global express
+12. **Emirates Post** - UAE national postal
+13. **Zajil** - Saudi express delivery
+14. **Naqel Express** - Saudi logistics
 
-### 💻 مكونات الدفع
-- ✅ PaymentHeader - رأس الصفحة مع شعار الشركة
-- ✅ PaymentButton - أزرار مطابقة للهوية
-- ✅ PaymentCard - بطاقات المحتوى
-- ✅ PaymentFormField - حقول النماذج
-- ✅ PaymentProgress - شريط التقدم
+### 💰 Dynamic Currency Detection
+Automatically detects currency based on country:
+- 🇸🇦 Saudi Arabia (SA) → SAR
+- 🇦🇪 UAE (AE) → AED
+- 🇰🇼 Kuwait (KW) → KWD
+- 🇶🇦 Qatar (QA) → QAR
+- 🇦🇪 Oman (OM) → OMR
+- 🇧🇭 Bahrain (BH) → BHD
 
-### 🌍 الشركات المدعومة
-- **🇦🇪 الإمارات**: Aramex, DHL, FedEx, UPS, Emirates Post
-- **🇸🇦 السعودية**: SMSA Express, Zajil, Naqel Express, Saudi Post
-- **🇰🇼 الكويت**: Kuwait Post
-- **🇶🇦 قطر**: Qatar Post
-- **🇴🇴 عُمان**: Oman Post
-- **🇧🇭 البحرين**: Bahrain Post
+### 🔒 Security
+- SSL 256-bit encryption badge
+- Secure payment flow
+- OTP verification
+- Data encryption
 
-## 🚀 البدء السريع
+## 🛠️ Tech Stack
 
-### متطلبات النظام
-- Node.js 18+
-- npm أو yarn
+- **React 18** + TypeScript
+- **Vite** - Lightning fast build tool
+- **Tailwind CSS** - Utility-first CSS
+- **Shadcn/ui** - Modern UI components
+- **React Router DOM** - Client-side routing
+- **React Query** - Data fetching
+- **Supabase** - Backend & Database
+- **Lucide React** - Beautiful icons
 
-### التثبيت
+## 📱 Payment Flow
+
+```
+1. Recipient Information
+   ↓ (URL params: ?country=SA&currency=SAR)
+2. Payment Details
+   ↓
+3. Card Information (Card number, Expiry, CVV)
+   ↓ (Month/Year dropdowns)
+4. OTP Verification
+   ↓
+5. Receipt Confirmation
+```
+
+## 🚀 Deployment
+
+### Option 1: Deploy via Git (Recommended)
+
 ```bash
-# Clone المستودع
-git clone https://github.com/you3333ef/payment-yousef.git
-cd payment-yousef
+# 1. Connect to Netlify
+#    - Go to https://app.netlify.com/
+#    - Click "New site from Git"
+#    - Connect GitHub
+#    - Select this repository
 
-# تثبيت التبعيات
+# 2. Configure build
+#    Build command: npm run build
+#    Publish directory: dist
+
+# 3. Add environment variables
+#    VITE_SUPABASE_URL=your_supabase_url
+#    VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+
+# 4. Deploy!
+```
+
+### Option 2: Deploy with CLI
+
+```bash
+# Install Netlify CLI
+npm install -g netlify-cli
+
+# Login
+netlify login
+
+# Initialize
+netlify init
+
+# Deploy
+netlify deploy --prod
+```
+
+### Option 3: Deploy via API
+
+```bash
+# Get your Netlify token and site ID
+export NETLIFY_TOKEN="your_token"
+export NETLIFY_SITE_ID="your_site_id"
+
+# Run deployment script
+./deploy.sh
+```
+
+## 📋 Environment Variables
+
+Create a `.env` file:
+
+```env
+VITE_SUPABASE_URL=https://your-project.supabase.co
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+
+## 🎯 Quick Start
+
+```bash
+# Clone the repository
+git clone https://github.com/you3333ef/paym.git
+cd paym
+
+# Install dependencies
 npm install
 
-# تشغيل الخادم المحلي
+# Run development server
 npm run dev
-```
 
-### البناء للإنتاج
-```bash
+# Build for production
 npm run build
-
-# اختبار البناء
-npm run preview
 ```
 
-## 📦 النشر على Netlify
-
-### الطريقة الأولى: من GitHub (موصى بها)
-
-1. **ادفع الكود إلى GitHub**
-   ```bash
-   git add .
-   git commit -m "feat: add theme system"
-   git push origin main
-   ```
-
-2. **اربط المستودع بـ Netlify**
-   - اذهب إلى [Netlify](https://app.netlify.com)
-   - اختر "New site from Git"
-   - اختر GitHub والمستودع
-
-3. **إعدادات البناء**
-   ```
-   Build command: npm run build
-   Publish directory: dist
-   ```
-
-4. **انشر** ✅
-
-### الطريقة الثانية: Drag & Drop
-```bash
-npm run build
-# اسحب مجلد dist إلى Netlify
-```
-
-📖 **[دليل النشر الكامل](./DEPLOYMENT-GUIDE.md)** - تفاصيل شاملة عن النشر واستكشاف الأخطاء
-
-## 🛠️ التقنيات المستخدمة
-
-- **Frontend**: React 18.3.1, TypeScript 5.8.3
-- **Build Tool**: Vite 5.4.19
-- **Styling**: Tailwind CSS, CSS Variables
-- **UI Components**: Radix UI, Lucide Icons
-- **Routing**: React Router v6
-- **State Management**: React Query (TanStack Query)
-- **Database**: Supabase
-- **Deployment**: Netlify
-
-## 📁 بنية المشروع
+## 📁 Project Structure
 
 ```
 src/
-├── components/
-│   ├── ui/                 # مكونات UI أساسية
-│   └── payment/            # مكونات الدفع المخصصة
-│       ├── PaymentHeader.tsx
-│       ├── PaymentButton.tsx
-│       ├── PaymentCard.tsx
-│       ├── PaymentFormField.tsx
-│       └── PaymentProgress.tsx
-├── themes/
-│   ├── themeConfig.ts      # إعدادات 14 شركة شحن
-│   ├── ThemeContext.tsx    # Context Provider
-│   └── themeStyles.css     # أنماط CSS العامة
-├── pages/
+├── components/          # React components
+│   ├── payment/        # Payment-specific components
+│   │   ├── PaymentCard.tsx
+│   │   ├── PaymentFormField.tsx
+│   │   ├── PaymentExpiryField.tsx (NEW)
+│   │   └── PaymentHeader.tsx
+│   └── ui/             # Shadcn/ui components
+├── pages/              # Application pages
+│   ├── PaymentRecipient.tsx
 │   ├── PaymentDetailsTheme.tsx
-│   ├── PaymentCardInputTheme.tsx
+│   ├── PaymentCardInputTheme.tsx (NEW)
 │   └── PaymentOTPTheme.tsx
-└── lib/
-    ├── serviceLogos.ts     # شعارات الشركات
-    └── banks.ts           # بيانات البنوك
+├── themes/             # Theme configuration
+│   └── themeConfig.ts  # 14 couriers + currency helper (UPDATED)
+├── hooks/              # Custom React hooks
+├── lib/                # Utility libraries
+└── utils/              # Helper functions
 ```
 
-## 🎨 استخدام نظام الثيمات
+## 🔧 Key Updates
 
-```tsx
-import { useTheme } from "@/themes/ThemeContext";
-import { PaymentHeader, PaymentCard, PaymentButton } from "@/components/payment";
+### v2.0.0 - Major Refactor
+- ✅ Added 5 new Gulf couriers (iMile, J&T, Ay Makan, Postaplus, Ubex)
+- ✅ Implemented `getCurrency()` helper for dynamic currency detection
+- ✅ Refactored PaymentCard with pixel-perfect styling
+- ✅ Added SSL 256-bit security badge to all payment cards
+- ✅ Created PaymentExpiryField with Month/Year dropdowns
+- ✅ Updated card number placeholder to "0000 0000 0000 0000"
+- ✅ Implemented URL params navigation (country & currency)
+- ✅ Updated all payment pages for seamless state preservation
 
-const MyComponent = () => {
-  const { theme } = useTheme();
+## 🧪 Testing
 
-  return (
-    <div style={{ backgroundColor: theme.colors.background }}>
-      <PaymentHeader
-        title="تفاصيل الدفع"
-        subtitle="خدمة آمنة"
-        showBackButton={true}
-      />
+Test all payment flows:
+1. Test with different countries (SA, AE, KW, QA, OM, BH)
+2. Verify currency detection works correctly
+3. Test expiry date dropdowns (Month/Year)
+4. Test OTP flow
+5. Verify responsive design
 
-      <PaymentCard title="معلومات الدفعة">
-        <PaymentButton variant="primary" size="lg">
-          الدفع الآن
-        </PaymentButton>
-      </PaymentCard>
-    </div>
-  );
-};
-```
+## 📸 Screenshots
 
-## 📚 الوثائق
+### Payment Form (Pixel-Perfect)
+- Clean card design with shadow
+- SSL security badge at bottom
+- Icon-positioned inputs (h-12 height)
+- Expiry with dual dropdowns
+- Masked CVV input
 
-- **[نظام الثيمات](./THEME-SYSTEM-DOCUMENTATION.md)** - وثائق شاملة
-- **[دليل الاستخدام](./THEME-USAGE-GUIDE.md)** - أمثلة عملية
-- **[تقرير التسليم](./DELIVERY-REPORT.md)** - تفاصيل المشروع
-- **[دليل النشر](./DEPLOYMENT-GUIDE.md)** - إرشادات Netlify
+### Payment Flow
+- Step-by-step progress indicator
+- URL params preserve state
+- Theme consistency across pages
 
-## ✅ إصلاحات Netlify
+## 🤝 Contributing
 
-تم إصلاح مشاكل:
-- ✅ صفحة بيضاء على الموبايل والديسكتوب
-- ✅ React Router مع SPA routing
-- ✅ Static assets paths
-- ✅ Service Worker registration
-- ✅ Error boundary محسن
-- ✅ Loading indicator
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a Pull Request
 
-## 📊 إحصائيات المشروع
+## 📄 License
 
-- **الملفات**: 261
-- **أسطر الكود**: ~3,000
-- **الشركات المدعومة**: 14
-- **دقة التطابق**: 98.6%
-- **Build Size**: ~950 kB (compressed: ~250 kB)
+This project is licensed under the MIT License.
 
-## 🤝 المساهمة
+## 🙏 Acknowledgments
 
-1. Fork المستودع
-2. أنشئ branch جديد (`git checkout -b feature/amazing-feature`)
-3. Commit التغييرات (`git commit -m 'feat: add amazing feature'`)
-4. Push للـ branch (`git push origin feature/amazing-feature`)
-5. افتح Pull Request
-
-## 📄 الترخيص
-
-هذا المشروع مرخص تحت رخصة MIT - انظر ملف [LICENSE](LICENSE) للتفاصيل.
-
-## 👥 فريق العمل
-
-- **التطوير**: Claude Code (Anthropic)
-- **التصميم**: نظام ثيمات متكامل
-- **البنية**: React + TypeScript + Vite
-
-## 📞 الدعم
-
-- 📖 الوثائق: [THEME-SYSTEM-DOCUMENTATION.md](./THEME-SYSTEM-DOCUMENTATION.md)
-- 🐛 المشاكل: [GitHub Issues](https://github.com/you3333ef/payment-yousef/issues)
-- 💬 المناقشات: [GitHub Discussions](https://github.com/you3333ef/payment-yousef/discussions)
-
-## 🙏 شكر وتقدير
-
-- فريق React على React 18
-- فريق Vite على أداة البناء السريعة
-- مجتمع Radix UI على مكونات UI
-- جميع شركات الشحن على الهوية البصرية
+- Built with ❤️ using React + TypeScript
+- UI components by Shadcn/ui
+- Icons by Lucide React
+- Deployment on Netlify
 
 ---
 
-<div align="center">
+**Live Demo:** [View on Netlify](https://app.netlify.com/)
 
-**⭐ إذا أعجبك المشروع، لا تنس إضافة نجمة! ⭐**
+**GitHub:** https://github.com/you3333ef/paym
 
-[GitHub](https://github.com/you3333ef/payment-yousef) • [Netlify](https://app.netlify.com) • [التوثيق](./THEME-SYSTEM-DOCUMENTATION.md)
-
-</div>
+**Author:** Yousef
